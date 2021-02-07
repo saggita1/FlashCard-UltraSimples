@@ -13,8 +13,20 @@ def nova_janela():
     top = Toplevel()
     top.title("DATABASE")
     top.geometry("400x200")
-    et = Entry(top).pack()
-    
+    et = Entry(top, width=30).pack()
+    et1 = Entry(top, width=30).place(x=108, y=40)
+
+    # variável
+    vat = StringVar()
+    vat.set("inserir")
+
+    # dropmenu
+    dpm = OptionMenu(top, vat, "inserir", "remover")
+    dpm.place(x=0, y=0)
+
+    # inglês ou português labels
+    ing = Label(top, text="English").place(x=300, y=0)
+    portu = Label(top, text="Portuguese").place(x=300, y=40)
 
 
 # label configs
