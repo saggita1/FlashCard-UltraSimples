@@ -21,6 +21,8 @@ def carregar_palavras():
     lista_palavras = cursor.fetchall()
     banco.close()
 
+    if not lista_palavras: # caso a lista esteja vazia
+        lista_palavras = [("", "")]
 
 def confirme():
     if e.get() == lista_palavras[tu_at][1]:
