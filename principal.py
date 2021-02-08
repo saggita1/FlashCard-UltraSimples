@@ -132,6 +132,15 @@ def iniciar():
     lista_palavras = cursor.fetchall()
     banco.close()
 
+    if not lista_palavras: # caso a lista esteja vazia
+        lista_palavras = [("", "")]
+        botao1["state"] = DISABLED
+        botao2["state"] = DISABLED
+        confirmar["state"] =DISABLED
+    elif len(lista_palavras) == 1:
+        botao1["state"] = DISABLED
+        botao2["state"] = DISABLED
+
 def recarregar():
     global label
     carregar_palavras()
