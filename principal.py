@@ -33,15 +33,23 @@ def nova_janela():
     def validar():
         if vat.get() == "inserir" and et.get() and et1.get():
             inserir(et.get(), et1.get())
+            et.delete(0, END)
+            et1.delete(0, END)
             return
         elif vat.get() == "remover" and (et.get() or et1.get()):
             if et.get():
                 deletar(eng=et.get())
-                return
+                et.delete(0, END) 
+                et1.delete(0, END)
+                return 
             if et1.get():
                 deletar(pt=et1.get())
+                et.delete(0, END)
+                et1.delete(0, END)
                 return 
         else:
+            et.delete(0, END)
+            et1.delete(0, END)
             print("ERRO")
 
 
