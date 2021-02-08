@@ -21,8 +21,15 @@ def carregar_palavras():
     lista_palavras = cursor.fetchall()
     banco.close()
 
+
     if not lista_palavras: # caso a lista esteja vazia
         lista_palavras = [("", "")]
+        botao1["state"] = DISABLED
+        botao2["state"] = DISABLED
+        confirmar["state"] =DISABLED
+    elif len(lista_palavras) == 1:
+        botao1["state"] = DISABLED
+        botao2["state"] = DISABLED
 
 def confirme():
     if e.get() == lista_palavras[tu_at][1]:
@@ -109,19 +116,18 @@ def anterior():
     e.delete(0, END) # limpando a entry
 
 
-# carregando as palavras
-carregar_palavras()
-
-# label configs
-label = Label(root, text=f"\n\n{lista_palavras[tu_at][0]}", font=("Times", 22))
-label.pack()
-
 # botões, SÓ PODE USAR O PLACE 
 botao1 = Button(root, text="ANTERIOR", font=("Times", 16), bd=4, command=anterior)
 botao1["state"] = DISABLED
 botao2 = Button(root, text="PRÓXIMA", font=("Times", 16), bd=4, command=proxima)
 confirmar = Button(root, text="CONFIRMAR", font=("Times", 7), activebackground="green", command=confirme)
 confg_data = Button(root, text="DATABASE", font=('Times', 16), bd=4, command=nova_janela)
+
+# label configs
+# carregando as palavras
+carregar_palavras()
+label = Label(root, text=f"\n\n{lista_palavras[tu_at][0]}", font=("Times", 22))
+label.pack()
 
 
 botao1.place(x=0, y=255)
