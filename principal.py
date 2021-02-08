@@ -1,4 +1,5 @@
 from tkinter import *
+from config_database import inserir, deletar
 
 root = Tk()
 root.geometry("500x300")
@@ -9,12 +10,21 @@ def confirme():
     #novo = e.get()
     print(e.get().split())
 
+
 def nova_janela():
+    # funções
+    def validar():
+        if vat.get() == "inserir" and et.get() and et1.get():
+            inserir(et.get(), et1.get())
+            print("INSERIDO COM SUCESSO")
+
     top = Toplevel()
     top.title("DATABASE")
-    top.geometry("400x200")
-    et = Entry(top, width=30).pack()
-    et1 = Entry(top, width=30).place(x=108, y=40)
+    top.geometry("400x150")
+    et = Entry(top, width=30) # english
+    et.pack()
+    et1 = Entry(top, width=30) # portuguese
+    et1.place(x=108, y=40)
 
     # variável
     vat = StringVar()
@@ -27,6 +37,9 @@ def nova_janela():
     # inglês ou português labels
     ing = Label(top, text="English").place(x=300, y=0)
     portu = Label(top, text="Portuguese").place(x=300, y=40)
+
+    # botão
+    botao = Button(top, text="CONFIRMAR", command=validar).place(x=160, y=70)
 
 
 # label configs
