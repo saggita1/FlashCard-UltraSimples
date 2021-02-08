@@ -23,8 +23,10 @@ def carregar_palavras():
 
 
 def confirme():
-    #novo = e.get()
-    print(e.get().split())
+    if e.get() == lista_palavras[tu_at][1]:
+        print("CORRETA")
+    else:
+        print("ERRADA")
 
 def nova_janela():
     # funções
@@ -68,6 +70,7 @@ def nova_janela():
 
 def proxima():
     global tu_at
+    global e
 
     # PRINCIPAL
     tu_at += 1
@@ -78,8 +81,11 @@ def proxima():
         botao2["state"] = DISABLED # desabilitando o botão pra não dar erro
     botao1["state"] = NORMAL # Ativando botão ANTERIOR
 
+    e.delete(0, END) # limpando a Entry
+
 def anterior():
     global tu_at
+    global e
 
     # PRINCIPAL
     tu_at -= 1
@@ -89,6 +95,8 @@ def anterior():
     if tu_at == 0:
         botao1["state"] = DISABLED # desabilitando 
     botao2["state"] = NORMAL # Ativando botão PRÓXIMO
+
+    e.delete(0, END) # limpando a entry
 
 
 # carregando as palavras
