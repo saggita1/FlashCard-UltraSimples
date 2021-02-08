@@ -1,6 +1,7 @@
 from tkinter import *
 import sqlite3
 from config_database import inserir, deletar
+from PIL import ImageTk, Image
 
 root = Tk()
 root.geometry("500x300")
@@ -12,6 +13,7 @@ tu_at = 0 # Tupla Atual
 # funções
 def carregar_palavras():
     global lista_palavras
+    global tu_at
 
     # sqlite config
     banco = sqlite3.connect('database_palavras.db')
@@ -21,6 +23,11 @@ def carregar_palavras():
     lista_palavras = cursor.fetchall()
     banco.close()
 
+    # resetando a tupla atual e os botões
+    tu_at = 0
+    confirmar["state"] = NORMAL
+    botao1["state"] = DISABLED
+    botao2["state"] = NORMAL
 
     if not lista_palavras: # caso a lista esteja vazia
         lista_palavras = [("", "")]
@@ -115,6 +122,24 @@ def anterior():
 
     e.delete(0, END) # limpando a entry
 
+def iniciar():
+    global lista_palavras
+    # sqlite config
+    banco = sqlite3.connect('database_palavras.db')
+    cursor = banco.cursor()
+    
+    cursor.execute("SELECT * FROM pessoas")
+    lista_palavras = cursor.fetchall()
+    banco.close()
+
+def recarregar():
+    global label
+    carregar_palavras()
+    label.config(text=f"\n\n{lista_palavras[tu_at][0]}")
+
+
+# imagem
+my_img = ImageTk.PhotoImage(Image.open("img_botao.png"))
 
 # botões, SÓ PODE USAR O PLACE 
 botao1 = Button(root, text="ANTERIOR", font=("Times", 16), bd=4, command=anterior)
@@ -122,14 +147,20 @@ botao1["state"] = DISABLED
 botao2 = Button(root, text="PRÓXIMA", font=("Times", 16), bd=4, command=proxima)
 confirmar = Button(root, text="CONFIRMAR", font=("Times", 7), activebackground="green", command=confirme)
 confg_data = Button(root, text="DATABASE", font=('Times', 16), bd=4, command=nova_janela)
+reload_database = Button(root, image=my_img, command=recarregar).place(x=140, y=6)
 
 # label configs
 # carregando as palavras
-carregar_palavras()
-label = Label(root, text=f"\n\n{lista_palavras[tu_at][0]}", font=("Times", 22))
+iniciar()
+label = Label(root, text=f"\n\n{lista_palavras[tu_at][0]}", font=("Times", 26))
 label.pack()
+# correta e errada
+#correta = Label(root, text="CORRETA", bg="green", font=("Times", 20))
+#correta.place(x=190, y=220)
+#errada = Label(root, text="ERRADA", bg="red", font=("Times", 20))
+#errada.place(x=190, y=220)
 
-
+# colocar na tela
 botao1.place(x=0, y=255)
 botao2.place(x=385, y=255)
 confirmar.place(x=340, y=180)
