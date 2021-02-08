@@ -39,10 +39,16 @@ def carregar_palavras():
         botao2["state"] = DISABLED
 
 def confirme():
+    global correta
+    global errada
     if e.get() == lista_palavras[tu_at][1]:
-        print("CORRETA")
+        correta = Label(root, text="CORRETA", bg="green", font=("Times", 20))
+        correta.place(x=190, y=220)
+        errada.place_forget()
     else:
-        print("ERRADA")
+        errada = Label(root, text="ERRADA", bg="red", font=("Times", 20))
+        errada.place(x=190, y=220)
+        correta.place_forget()
 
 def nova_janela():
     # funções
@@ -95,6 +101,12 @@ def nova_janela():
 def proxima():
     global tu_at
     global e
+    global correta
+    global errada
+
+    # correta e errada
+    correta.place_forget()
+    errada.place_forget()
 
     # PRINCIPAL
     tu_at += 1
@@ -110,7 +122,13 @@ def proxima():
 def anterior():
     global tu_at
     global e
+    global correta
+    global errada
 
+    # correta e errada
+    correta.place_forget()
+    errada.place_forget()
+    
     # PRINCIPAL
     tu_at -= 1
     label.configure(text=f"\n\n{lista_palavras[tu_at][0]}")
@@ -163,11 +181,14 @@ reload_database = Button(root, image=my_img, command=recarregar).place(x=140, y=
 iniciar()
 label = Label(root, text=f"\n\n{lista_palavras[tu_at][0]}", font=("Times", 26))
 label.pack()
+
 # correta e errada
-#correta = Label(root, text="CORRETA", bg="green", font=("Times", 20))
-#correta.place(x=190, y=220)
-#errada = Label(root, text="ERRADA", bg="red", font=("Times", 20))
-#errada.place(x=190, y=220)
+correta = Label(root, text="", bg="green", font=("Times", 20))
+correta.place(x=190, y=220)
+correta.place_forget()
+errada = Label(root, text="", bg="red", font=("Times", 20))
+errada.place(x=190, y=220)
+errada.place_forget()
 
 # colocar na tela
 botao1.place(x=0, y=255)
