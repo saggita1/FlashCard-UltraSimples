@@ -16,7 +16,17 @@ def nova_janela():
     def validar():
         if vat.get() == "inserir" and et.get() and et1.get():
             inserir(et.get(), et1.get())
-            print("INSERIDO COM SUCESSO")
+            return
+        elif vat.get() == "remover" and (et.get() or et1.get()):
+            if et.get():
+                deletar(eng=et.get())
+                return
+            if et1.get():
+                deletar(pt=et1.get())
+                return 
+        else:
+            print("ERRO")
+
 
     top = Toplevel()
     top.title("DATABASE")
