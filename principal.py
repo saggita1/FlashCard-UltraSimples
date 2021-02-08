@@ -69,18 +69,26 @@ def nova_janela():
 def proxima():
     global tu_at
 
-    if tu_at == len(lista_palavras) - 1:
-        return
+    # PRINCIPAL
     tu_at += 1
     label.configure(text=f"\n\n{lista_palavras[tu_at][0]}")
+
+    # ESTADO DO BOTÃO
+    if tu_at == len(lista_palavras) - 1:
+        botao2["state"] = DISABLED # desabilitando o botão pra não dar erro
+    botao1["state"] = NORMAL # Ativando botão ANTERIOR
 
 def anterior():
     global tu_at
 
-    if tu_at == 0:
-        return
+    # PRINCIPAL
     tu_at -= 1
     label.configure(text=f"\n\n{lista_palavras[tu_at][0]}")
+
+    # ESTADO DO BOTÃO
+    if tu_at == 0:
+        botao1["state"] = DISABLED # desabilitando 
+    botao2["state"] = NORMAL # Ativando botão PRÓXIMO
 
 
 # carregando as palavras
@@ -92,6 +100,7 @@ label.pack()
 
 # botões, SÓ PODE USAR O PLACE 
 botao1 = Button(root, text="ANTERIOR", font=("Times", 16), bd=4, command=anterior)
+botao1["state"] = DISABLED
 botao2 = Button(root, text="PRÓXIMA", font=("Times", 16), bd=4, command=proxima)
 confirmar = Button(root, text="CONFIRMAR", font=("Times", 7), activebackground="green", command=confirme)
 confg_data = Button(root, text="DATABASE", font=('Times', 16), bd=4, command=nova_janela)
