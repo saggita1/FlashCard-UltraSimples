@@ -6,7 +6,7 @@ from PIL import ImageTk, Image
 root = Tk()
 root.geometry("500x300")
 root.title("FlashCards")
-
+root.iconbitmap("laptop_computer_files_archive_documents_pc_icon_179700.ico")
 # variáveis globais
 tu_at = 0 # Tupla Atual
 
