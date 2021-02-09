@@ -155,6 +155,8 @@ def recarregar():
     global label
     carregar_palavras()
     label.config(text=f"\n\n{lista_palavras[tu_at][0]}")
+    # Correta e errada
+    corr_erra.config(text="", bg="white")
 
 
 # imagem
